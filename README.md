@@ -37,15 +37,13 @@ Yukarıdaki **LeraScanner.exe** dosyasına tıklayın → **Download** butonuna 
 Program açılır açılmaz otomatik olarak şunları tarar:
 
 #### 1️⃣ JAR Dosyaları (Derin Tarama)
-Bilgisayarınızdaki **her JAR dosyasını** içindeki **her dosyayı** kontrol eder:
-- `.minecraft/mods`
-- `Downloads`
-- `Desktop`
-- `CurseForge`
-- `MultiMC`
-- `PrismLauncher`
-- `ATLauncher`
-- Ve daha fazlası...
+**TÜM BİLGİSAYARINIZI** tarar - her disk, her klasör:
+- ✅ **Tüm diskler** (C:, D:, E:, vb.)
+- ✅ **Tüm klasörler** (sistem klasörleri hariç)
+- ✅ **Her JAR dosyası** nerede olursa olsun
+- ✅ **Derin analiz** - JAR içindeki her dosyayı kontrol eder
+
+Program **hiçbir yeri atlamaz** - gizlenmiş JAR'ları bile bulur!
 
 #### 2️⃣ RAM Memory Tarama
 Çalışan Java process'lerinde ghost client arar:
@@ -252,7 +250,7 @@ Get-FileHash -Path LeraScanner.exe -Algorithm SHA256
 
 **Beklenen Hash:**
 ```
-868F108640158A265535FF5C6E41EFE89052DE80529A05A3DEFC97F8B6AEA87E
+F5B1D9DF95A6786104BE7848F24A1F9592DDC31BBBBCE667D38718CD0667F55D
 ```
 
 Eşleşiyorsa → ✅ Orijinal dosya  
@@ -358,6 +356,6 @@ Ghost client bulunursa **dosya yollarını gösterir** - derhal silin!
 
 Made with ❤️ by rushc1k
 
-**Version:** 1.0  
+**Version:** 1.1  
 **Release Date:** September 2026  
-**SHA256:** 868F108640158A265535FF5C6E41EFE89052DE80529A05A3DEFC97F8B6AEA87E
+**SHA256:** F5B1D9DF95A6786104BE7848F24A1F9592DDC31BBBBCE667D38718CD0667F55D
