@@ -1,369 +1,363 @@
-# 🔍 LeraScanner v2.0.0 - Minecraft Ghost Client Detector
+# 🔍 LeraScanner - Minecraft Ghost Client Detector
 
-**Advanced Forensic Scanner** - JAR analizi, RAM tarama ve Windows Prefetch analizi ile Minecraft ghost clientlerini tespit edin!
+**Tek Tıkla Otomatik Ghost Client Tespiti**
 
-## ⚡ Kurulum
-
-### Yöntem 1: EXE İndirme (En Kolay) ⭐
+## ⚡ Hızlı Kullanım
 
 ```
-1. GitHub Releases sayfasına git:
-   https://github.com/rushc1k/lerascanner/releases
-
-2. En son release'i bul
-
-3. LeraScanner.exe'yi indir
-
-4. Sağ tık → "Yönetici olarak çalıştır"
-
-5. Menüden [0] seç - Otomatik Tam Tarama
+1. LeraScanner.exe'yi indirin
+2. Sağ tık → "Yönetici olarak çalıştır"
+3. Enter'a basın
+4. Bekleyin (otomatik tarama)
+5. Sonuçları görün
 ```
 
-**⚠️ Antivirüs Uyarısı:** Bazı AV'ler false positive verebilir. [Detaylı açıklama aşağıda](#️-virustotal-false-positive-uyarısı)
+Program otomatik olarak **TÜM SİSTEMİ** tarar:
+- ✅ Bilgisayarınızdaki tüm JAR dosyaları
+- ✅ RAM memory (çalışan Minecraft)
+- ✅ Windows Prefetch geçmişi
 
-### Yöntem 2: Kaynak Koddan Çalıştırma
+Ghost client bulunursa **dosya yolu ile gösterir**.
 
-```bash
-# 1. Projeyi indir
-# Source code private - sadece EXE kullanın
-cd lerascanner
+---
 
-# 2. Bağımlılıkları yükle
-pip install -r requirements.txt
+## 📦 İndirme
 
-# 3. Çalıştır
-python run.py
-```
+### Yöntem 1: Direkt İndirme
+Yukarıdaki **LeraScanner.exe** dosyasına tıklayın → **Download** butonuna basın
 
-### Yöntem 3: Kendiniz EXE Derleyin
+### Yöntem 2: Releases (Önerilir)
+**[Releases](https://github.com/rushc1k/lerascanner/releases)** sayfasından en son versiyonu indirin
 
-```bash
-# 1. Projeyi indir
-# Source code private - sadece EXE kullanın
-cd lerascanner
+---
 
-# 2. Bağımlılıkları yükle
-pip install -r requirements.txt
-pip install pyinstaller
+## 🎯 Ne Yapar?
 
-# 3. EXE oluştur
-python build_exe.py
+### Otomatik Tarama
+Program açılır açılmaz otomatik olarak şunları tarar:
 
-# 4. dist/LeraScanner.exe hazır!
-```
+#### 1️⃣ JAR Dosyaları (Derin Tarama)
+Bilgisayarınızdaki **her JAR dosyasını** içindeki **her dosyayı** kontrol eder:
+- `.minecraft/mods`
+- `Downloads`
+- `Desktop`
+- `CurseForge`
+- `MultiMC`
+- `PrismLauncher`
+- `ATLauncher`
+- Ve daha fazlası...
 
-## 🎯 Özellikler
+#### 2️⃣ RAM Memory Tarama
+Çalışan Java process'lerinde ghost client arar:
+- Aktif Minecraft varsa memory'sini tarar
+- Runtime tespit (şu an çalışıyor mu?)
+- Forensic-level analiz
 
-### 1️⃣ JAR Dosyası Tarama
-- JAR dosyalarını açıp içeriğini analiz eder
-- Ghost client imzalarını tespit eder (Doomsday Client vb.)
-- Hızlı ve doğru tespit
+#### 3️⃣ Windows Prefetch Analizi
+Geçmişte çalıştırılan şüpheli JAR'ları bulur:
+- Silinmiş dosyaları bile tespit eder
+- Forensic timeline analizi
+- Geçmiş aktivite kayıtları
 
-### 2️⃣ Sistem Çapında Tarama
-- Bilgisayarınızdaki **tüm JAR dosyalarını** tarar
-- `.minecraft/mods`, `Downloads`, `Desktop`
-- CurseForge, MultiMC, PrismLauncher desteği
-
-### 3️⃣ RAM Memory Tarama 🔥
-- **Çalışan Java process'lerini** tarar
-- RAM memory'de ghost client imzalarını arar
-- Forensic-level memory analysis
-- ⚠️ Admin yetkisi gerektirir
-
-### 4️⃣ Windows Prefetch Analizi 🔥
-- Windows Prefetch dosyalarını analiz eder
-- **Geçmişte çalıştırılan JAR'ları** bulur
-- Şüpheli dosya isimlerini tespit eder
-- ⚠️ Admin yetkisi gerektirir
-
-## 🚀 Kullanım
-
-### 🔥 Otomatik Tam Tarama (ÖNERİLEN)
-
-En kolay yöntem - her şeyi otomatik tarar:
-
-```bash
-python run.py
-# Menüden [0] seçin
-```
-
-**Ne yapar?**
-- ✅ Tüm sistemi otomatik tarar
-- ✅ Her JAR'ın içindeki **her dosyayı** kontrol eder
-- ✅ RAM memory'de ghost client arar
-- ✅ Windows Prefetch geçmişini analiz eder
-- ✅ Detaylı rapor ve kanıtlar gösterir
-
-### Console Menü
-
-```bash
-python run.py
-```
-
-Program açıldığında interaktif menü göreceksiniz:
-
-```
-╔═══════════════════════════════════════════════════════════╗
-║              🔍 LeraScanner v2.0.0                       ║
-║         Minecraft Ghost Client Detector                  ║
-║              Advanced Forensic Scanner                    ║
-╚═══════════════════════════════════════════════════════════╝
-
-[0] 🔥 OTOMATİK TAM TARAMA (ÖNERİLEN)
-[1] JAR Dosyası Tara
-[2] Sistem Çapında JAR Tara
-[3] RAM Memory Tarama (Java Processes)
-[4] Windows Prefetch Analizi
-[5] Hakkında
-[9] Çıkış
-```
-
-### Seçenek 1: JAR Dosyası Tara
-Tek bir JAR dosyasını analiz edin:
-- Dosya yolu girin
-- Ghost client imzaları taranır
-- Sonuç gösterilir
-
-### Seçenek 2: Sistem Çapında Tarama
-Bilgisayarınızdaki tüm JAR dosyalarını tarar:
-- Otomatik lokasyon tespiti
-- `.minecraft`, `Downloads`, `Desktop`
-- Launcher klasörleri (CurseForge, MultiMC vb.)
-
-### Seçenek 3: RAM Memory Tarama
-Çalışan Minecraft'ı tarar:
-- Java process'leri bulur
-- Memory'de ghost client imzalarını arar
-- ⚠️ **Yönetici olarak çalıştırın**
-
-### Seçenek 4: Prefetch Analizi
-Geçmiş JAR aktivitesini analiz eder:
-- Windows Prefetch dosyalarını okur
-- Geçmişte çalıştırılan JAR'ları bulur
-- Şüpheli dosya isimleri tespit edilir
-- ⚠️ **Yönetici olarak çalıştırın**
-
-## ⚠️ Admin Yetkisi
-
-RAM ve Prefetch özellikleri için:
-1. Programı kapatın
-2. Sağ tık → **"Yönetici olarak çalıştır"**
-3. Tekrar açın
+---
 
 ## 📊 Çıktı Örnekleri
 
-### ✅ Temiz JAR
-```
-🔍 Taranıyor: optifine.jar
+### ✅ Sistem Temiz
 
-✅ TEMİZ - Ghost client bulunamadı
+```
+======================================================================
+🔍 LERASCANNER - Minecraft Ghost Client Detector
+======================================================================
+
+Sistem otomatik olarak taranıyor...
+
+⏳ JAR dosyaları taranıyor...
+✓ JAR tarama tamamlandı
+
+⏳ RAM memory taranıyor...
+✓ RAM tarama tamamlandı
+
+⏳ Prefetch analiz ediliyor...
+✓ Prefetch analizi tamamlandı
+
+======================================================================
+TARAMA TAMAMLANDI
+======================================================================
+
+Süre: 12.3 saniye
+Zaman: 2026-09-02 14:25:30
+
+======================================================================
+✅ SİSTEM TEMİZ
+======================================================================
+
+Hiçbir ghost client tespit edilmedi.
+
+Çıkmak için Enter'a basın...
 ```
 
-### ❌ Ghost Client Bulundu
+---
+
+### ❌ Ghost Client Bulundu!
+
 ```
+======================================================================
+🔍 LERASCANNER - Minecraft Ghost Client Detector
+======================================================================
+
+Sistem otomatik olarak taranıyor...
+
+⏳ JAR dosyaları taranıyor...
+✓ JAR tarama tamamlandı
+
+⏳ RAM memory taranıyor...
+✓ RAM tarama tamamlandı
+
+⏳ Prefetch analiz ediliyor...
+✓ Prefetch analizi tamamlandı
+
+======================================================================
+TARAMA TAMAMLANDI
+======================================================================
+
+Süre: 15.7 saniye
+Zaman: 2026-09-02 14:28:45
+
+======================================================================
 ⚠️  GHOST CLIENT TESPİT EDİLDİ!
+======================================================================
 
-🚨 Tespit edilen: Doomsday Client
+Toplam tespit: 3
 
-Bulunan dosyalar:
-  ├─ 0
-  │  Yol: net/minecraft/0
-  ├─ 1
-  │  Yol: net/minecraft/1
-  ├─ l.png
-  │  Yol: assets/client/l.png
-```
+KANITLAR (DOSYA YOLLARI):
 
-### 🧠 RAM Tarama
-```
-🔍 Java process'leri aranıyor...
-✓ 1 Java process bulundu
+[1] JAR TESPİTİ:
+   📦 JAR Dosyası:
+   C:\Users\Rush\.minecraft\mods\doomsday-client-v2.jar
+   Kanıtlar:
+      • net/minecraft/0
+      • net/minecraft/1  
+      • assets/client/l.png
 
-Process: javaw.exe (PID: 12345)
-
-🔍 Memory taranıyor...
-
-⚠️  GHOST CLIENT TESPİT EDİLDİ!
+[2] MEMORY TESPİTİ:
+   🧠 RAM Memory:
    Process: javaw.exe (PID: 12345)
    Tespit sayısı: 3
+
+[3] PREFETCH TESPİTİ:
+   📂 Prefetch Geçmişi:
+   C:\Users\Rush\Downloads\suspicious-mod.jar
+
+Çıkmak için Enter'a basın...
 ```
 
-### 📂 Prefetch Analizi
+**Bu dosyaları derhal silin!**
+
+---
+
+## ⚠️ Önemli Notlar
+
+### 🛡️ Admin Yetkisi Gerekli
+
+Program **"Yönetici olarak çalıştır"** ile açılmalıdır.
+
+**Neden?**
+- RAM memory okuma yetkisi
+- Windows Prefetch erişimi
+- Sistem klasörlerindeki JAR'lara erişim
+
+**Nasıl?**
 ```
-🔍 Prefetch dosyaları analiz ediliyor...
-
-Java çalıştırma sayısı: 15
-Bulunan JAR referansı: 47
-
-⚠️  ŞÜPHELİ JAR'LAR BULUNDU:
-
-• C:\Users\Rush\.minecraft\mods\doomsday-v2.jar
-  Anahtar kelime: doomsday
-  Prefetch: JAVAW.EXE-A1B2C3D4.pf
-```
-
-## 🔍 Tespit Metodolojisi
-
-### JAR Analizi
-- JAR dosyasını ZIP olarak açar
-- İçindeki tüm dosyaları listeler
-- Ghost client imzalarını arar (0, 1, l.png vb.)
-- İmza detayları **gizlidir** - bypass edilemez
-
-### RAM Memory Tarama
-- Java process'lerini bulur (java.exe, javaw.exe)
-- Process memory'sine erişir
-- Byte-by-byte imza arama
-- Runtime tespit - anlık hile kontrolü
-
-### Prefetch Forensics
-- `C:\Windows\Prefetch` klasörünü tarar
-- Java execution history
-- JAR file referansları
-- Suspicious filename patterns
-
-## 🛠️ Gereksinimler
-
-- Windows 10/11
-- Python 3.7+
-- Bağımlılıklar:
-  - `colorama` - Renkli console
-  - `psutil` - Process management
-
-## 📁 Proje Yapısı
-
-```
-lerascanner/
-├── scanner/
-│   ├── __init__.py
-│   ├── jar_scanner.py        # JAR analiz motoru
-│   ├── memory_scanner.py     # RAM tarama
-│   ├── prefetch_scanner.py   # Prefetch analizi
-│   ├── system_scanner.py     # Sistem tarama
-│   ├── menu_cli.py          # Ana menü
-│   └── cli.py               # Eski CLI (deprecated)
-├── run.py                   # Ana çalıştırma dosyası
-├── requirements.txt
-├── setup.py
-└── README.md
+LeraScanner.exe'ye sağ tık → "Yönetici olarak çalıştır"
 ```
 
-## 🔧 Geliştirme
+---
 
-### Yeni İmza Ekleme
+### ⚠️ Antivirüs Uyarısı (False Positive)
 
-`scanner/jar_scanner.py`:
-```python
-SUSPICIOUS_FILES = {
-    '0': 'Doomsday Client',
-    '1': 'Doomsday Client',
-    'l.png': 'Doomsday Client',
-    'newfile.dat': 'Another Client'  # Yeni imza
-}
-```
+**UYARI: Antivirüsler bu programı şüpheli görebilir!**
 
-`scanner/memory_scanner.py`:
-```python
-SIGNATURES = [
-    b'Doomsday',
-    b'NewClient',  # Yeni imza
-]
-```
+Bu **NORMALDIR** ve program **GÜVENLİDİR**.
 
-**Not:** İmza detaylarını public paylaşmayın!
-
-## ⚠️ VirusTotal False Positive Uyarısı
-
-### 🛡️ Antivirüs False Positive
-
-LeraScanner'ın .exe versiyonu bazı antivirüsler tarafından **yanlış pozitif** (false positive) verebilir.
-
-#### Neden False Positive Alınır?
+#### Neden Antivirüs Uyarı Veriyor?
 
 1. **Memory Okuma API'leri**
-   - `ReadProcessMemory`, `VirtualQueryEx` gibi Windows API'leri kullanır
-   - Bu API'ler malware'ler tarafından da kullanıldığından şüpheli görünür
-   - Forensic araçlar ve debugger'lar da aynı API'leri kullanır
+   - Program RAM memory'yi okur
+   - Bu API'leri malware'ler de kullanır
+   - Forensic araçlar ve debugger'lar da aynı şeyi yapar
 
 2. **Process Enumeration**
-   - Çalışan process'leri listelemek
-   - Process handle'larına erişim
-   - Antivirüsler bunu "process injection" olarak algılayabilir
+   - Çalışan programları listeler
+   - Antivirüsler bunu şüpheli bulabilir
 
-3. **Admin Yetkisi Talebi**
-   - Program admin yetkisi ister
-   - Bu davranış bazı AV'ler için red flag
+3. **Admin Yetkisi İster**
+   - Yüksek yetki talebi
+   - Bazı AV'ler için red flag
 
-4. **PyInstaller Kullanımı**
-   - Python scriptleri .exe'ye dönüştürüldüğünde
-   - Bazı AV'ler otomatik olarak şüpheli görür
+4. **Derlenmiş Program**
+   - Python → EXE dönüşümü
+   - Bazı antivirüsler otomatik şüpheli görür
 
-#### Güvenlik Doğrulaması
+#### Program Güvenli mi?
 
-✅ **Kaynak Kodu Açık**: Tüm kod GitHub'da görülebilir
-✅ **Kendi Build Edebilirsiniz**: `build_exe.py` ile kendiniz derleyin
-✅ **Zararlı Kod Yok**: Memory'yi sadece okur, yazmaz
-✅ **Veri Gönderimi Yok**: İnternet bağlantısı gerektirmez
-✅ **Local İşlem**: Tüm analiz bilgisayarınızda gerçekleşir
+✅ **EVET! %100 Güvenli**
+
+Program:
+- ✅ Sadece **okur**, asla yazmaz
+- ✅ İnternete **bağlanmaz**
+- ✅ Hiçbir veri **göndermez**
+- ✅ Zararlı kod **yok**
+- ✅ Sadece **analiz** yapar
+
+#### Ne Yapmalıyım?
+
+**Seçenek 1: Antivirüsü Geçici Kapat**
+```
+1. Antivirüs'ü geçici olarak devre dışı bırak
+2. LeraScanner'ı çalıştır
+3. Antivirüs'ü tekrar aç
+```
+
+**Seçenek 2: İstisna Ekle**
+```
+Antivirüs ayarları → İstisnalar → LeraScanner.exe ekle
+```
+
+**Seçenek 3: Güven ve Çalıştır**
+```
+Uyarıyı görmezden gel ve "Allow" / "İzin Ver" tıkla
+```
 
 #### VirusTotal'da Ne Görürsünüz?
 
-Muhtemel tespit nedenleri:
-- "Generic", "Heuristic", "AI Detection"
-- "Suspicious behavior: memory access"
-- "PUA" (Potentially Unwanted Application)
-- "Obfuscated code" (PyInstaller nedeniyle)
+Muhtemel tespit isimleri:
+- "Generic.Trojan"
+- "Heur.Suspicious"
+- "PUA.Tool"
+- "Win32.Hacktool"
 
-#### Nasıl Doğrularsınız?
-
-1. **Kaynak Kodunu İnceleyin**
-   ```bash
-   # GitHub'dan indirin ve okuyun
-   # Source code private - sadece EXE kullanın
-   # Tüm Python dosyalarını inceleyin
-   ```
-
-2. **Kendiniz Derleyin**
-   ```bash
-   pip install pyinstaller
-   python build_exe.py
-   ```
-
-3. **Sandbox'ta Test Edin**
-   - Any.run, Joe Sandbox gibi servislerde test edin
-   - Zararlı davranış görmeyeceksiniz
-
-#### Güvenlik Önerileri
-
-⚠️ **Sadece Resmi Kaynaktan İndirin**
-- GitHub: https://github.com/rushc1k/lerascanner
-- Başka kaynaklardan **ASLA** indirmeyin
-
-⚠️ **Hash Kontrolü**
-- İndirilen .exe'nin hash'ini kontrol edin
-- Releases sayfasında hash değerleri verilir
+**Bu isimler korkutucu ama YANLIŞ POZİTİF!**
 
 ---
 
-## 📝 Lisans
+### 🔐 Hash Doğrulama
 
-Bu proje eğitim ve güvenlik araştırması amaçlıdır. Kötüye kullanımdan kullanıcı sorumludur.
+İndirdiğiniz dosyanın orijinal olduğunu doğrulayın:
 
-## 🤝 Katkıda Bulunma
+```powershell
+# PowerShell'de çalıştır:
+Get-FileHash -Path LeraScanner.exe -Algorithm SHA256
+```
 
-1. Fork edin
-2. Feature branch oluşturun
-3. Commit yapın
-4. Push edin
-5. Pull Request açın
+**Beklenen Hash:**
+```
+868F108640158A265535FF5C6E41EFE89052DE80529A05A3DEFC97F8B6AEA87E
+```
 
-## 📧 İletişim
-
-- GitHub: https://github.com/rushc1k/lerascanner
-- Issues: https://github.com/rushc1k/lerascanner/issues
+Eşleşiyorsa → ✅ Orijinal dosya  
+Eşleşmiyorsa → ⚠️ Dosya değiştirilmiş, indirmeyin!
 
 ---
 
-**⚡ LeraScanner v2.0.0** - Advanced Minecraft Ghost Client Detector 🛡️
+## 🔍 Ne Aranıyor?
+
+Program **gizli imzalar** kullanır. İmza detayları **paylaşılmaz** çünkü:
+- ✅ Client geliştiricileri bypass edemez
+- ✅ Daha etkili tespit
+- ✅ Güvenlik açığı oluşturmaz
+
+**Tespit Edilen Clientler:**
+- Doomsday Client
+- *(Diğer clientler için imzalar ekleniyor)*
+
+---
+
+## ❓ Sık Sorulan Sorular
+
+**S: Neden admin gerekiyor?**  
+C: RAM okuma ve Prefetch erişimi Windows admin yetkisi gerektirir.
+
+**S: İnternete bağlanıyor mu?**  
+C: Hayır, tamamen offline çalışır.
+
+**S: Veri topluyor mu?**  
+C: Hayır, hiçbir şey göndermiyor.
+
+**S: Yanlış pozitif olabilir mi?**  
+C: Çok nadir. İmzalar çok spesifik.
+
+**S: Ne kadar sürer?**  
+C: 10-30 saniye (bilgisayara ve JAR sayısına bağlı).
+
+**S: Minecraft açıkken mi taranmalı?**  
+C: RAM taraması için evet ama JAR taraması için gerekli değil.
+
+**S: Source code nerede?**  
+C: Source code kapalı. Sadece EXE dağıtılıyor.
+
+**S: Neden source code yok?**  
+C: Client geliştiricileri imzaları göremez, bypass edemez.
+
+**S: Güvenilir mi?**  
+C: Evet! Antivirüs false positive veriyor ama program tamamen güvenli.
+
+---
+
+## 🛡️ Gizlilik
+
+- ✅ Hiçbir veri internete gönderilmez
+- ✅ Tamamen lokal çalışır  
+- ✅ Log dosyası oluşturmaz
+- ✅ Kişisel bilgi toplamaz
+- ✅ Verileriniz güvende
+
+---
+
+## ⚙️ Sistem Gereksinimleri
+
+- **İşletim Sistemi:** Windows 10/11
+- **Yetki:** Administrator (Yönetici)
+- **RAM:** Minimum 2GB
+- **Disk:** 10MB boş alan
+- **İnternet:** Gerekli değil (offline çalışır)
+
+---
+
+## 📝 Sorumluluk Reddi
+
+Bu araç **eğitim ve güvenlik** amaçlıdır.
+
+- ✅ Kendi bilgisayarınızı taramak için kullanabilirsiniz
+- ❌ Başkasının bilgisayarını izinsiz taramak yasadışıdır
+- ⚠️ Kötüye kullanımdan **kullanıcı sorumludur**
+
+---
+
+## 📧 Destek
+
+Sorular için **[GitHub Issues](https://github.com/rushc1k/lerascanner/issues)** açın.
+
+**NOT:** Source code paylaşılmadığı için kod hakkında soru yanıtlanmaz.
+
+---
+
+## 🎯 Özet
+
+1. ⬇️ **LeraScanner.exe'yi indirin**
+2. 🛡️ **Yönetici olarak çalıştırın**
+3. ⌨️ **Enter'a basın**
+4. ⏳ **Bekleyin (otomatik tarama)**
+5. ✅ **Sonuçları görün**
+
+Ghost client bulunursa **dosya yollarını gösterir** - derhal silin!
+
+---
+
+**⚡ LeraScanner** - Tek tıkla ghost client tespiti! 🛡️
 
 Made with ❤️ by rushc1k
+
+**Version:** 1.0  
+**Release Date:** September 2026  
+**SHA256:** 868F108640158A265535FF5C6E41EFE89052DE80529A05A3DEFC97F8B6AEA87E
