@@ -42,6 +42,11 @@ Program açılır açılmaz otomatik olarak şunları tarar:
 - ✅ **Tüm klasörler** (sistem klasörleri hariç)
 - ✅ **Her JAR dosyası** nerede olursa olsun
 - ✅ **Derin analiz** - JAR içindeki her dosyayı kontrol eder
+- ✅ **Progress bar** - Ne kadar tamamlandığını gösterir
+
+```
+[████████████░░░░░] 45.2% (23/51) mod-file.jar
+```
 
 Program **hiçbir yeri atlamaz** - gizlenmiş JAR'ları bile bulur!
 
@@ -250,7 +255,7 @@ Get-FileHash -Path LeraScanner.exe -Algorithm SHA256
 
 **Beklenen Hash:**
 ```
-F5B1D9DF95A6786104BE7848F24A1F9592DDC31BBBBCE667D38718CD0667F55D
+58C19AABB3B9F3DEF95E597362CE84078DE5C6B7EB3437019B53B52E9B98F45C
 ```
 
 Eşleşiyorsa → ✅ Orijinal dosya  
@@ -356,6 +361,6 @@ Ghost client bulunursa **dosya yollarını gösterir** - derhal silin!
 
 Made with ❤️ by rushc1k
 
-**Version:** 1.1  
+**Version:** 1.2  
 **Release Date:** September 2026  
-**SHA256:** F5B1D9DF95A6786104BE7848F24A1F9592DDC31BBBBCE667D38718CD0667F55D
+**SHA256:** 58C19AABB3B9F3DEF95E597362CE84078DE5C6B7EB3437019B53B52E9B98F45C
